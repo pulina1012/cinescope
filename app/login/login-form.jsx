@@ -60,8 +60,8 @@ export function LoginForm() {
     const email = formData.get("email");
     const password = formData.get("password");
 
-    // console.log("Email Reg", EMAIL_REGEX.test(email));
-    // console.log("validate", validateForm({ email, password }));
+    console.log("Email Reg", EMAIL_REGEX.test(email));
+    console.log("validate", validateForm({ email, password }));
 
     if (validateForm({ email, password })) {
       //login action
@@ -70,7 +70,7 @@ export function LoginForm() {
         {
           onSuccess: () => {
             setLoading(false);
-            redirect("/dashboard");
+            redirect("/admin");
           },
           onError: (ctx) => {
             setError({

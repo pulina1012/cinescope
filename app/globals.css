@@ -2,6 +2,7 @@
 @import "tw-animate-css";
 
 :root {
+  --background: hsl(0 0% 100%);
   --card: hsl(0 0% 100%);
   --card-foreground: hsl(222.2 84% 4.9%);
   --popover: hsl(0 0% 100%);

@@ -31,6 +31,7 @@ export const getMovies = async () => {
 
 //create movie action
 export const createMovie = async (movie) => {
+  console.log("before db test");
   try {
     const result = await db.collection("movies_new").insertOne(movie);
 

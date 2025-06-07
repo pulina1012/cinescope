@@ -76,9 +76,11 @@ export function SignUpForm({ className, ...props }) {
         {
           onRequest: (ctx) => {
             console.log("onRequest", ctx);
+            console.log("inside email", email, password, confirmPassword);
           },
           onSuccess: () => {
-            // redirect to login
+                       console.log("success", email, password, confirmPassword);
+
           },
           onError: (ctx) => {
             setError({

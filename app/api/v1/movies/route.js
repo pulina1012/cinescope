@@ -11,7 +11,7 @@ export const GET = async () => {
     const movies = await db
       .collection("movies")
       .find({})
-      .sort({ metacritic : -1 })
+      .sort({ metacritic: -1 })
       .limit(20)
       .toArray()
       .catch((error) => {

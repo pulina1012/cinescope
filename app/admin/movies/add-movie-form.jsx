@@ -13,6 +13,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { createMovie } from "@/actions/movies";
 
 export function AddMovieForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);

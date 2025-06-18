@@ -14,8 +14,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { createMovie } from "@/actions/movies";
+import { getYears } from "@/lib/utils";
+
 
 export function AddMovieForm({onClose}) {
+  const years = getYears;
   const [isSubmitting, setIsSubmitting] = useState(false);
   // Controlled states
   const [selectedYear, setSelectedYear] = useState("");
@@ -30,6 +33,8 @@ export function AddMovieForm({onClose}) {
     // close the dialog
     onClose(false);
   };
+
+  getYears
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -80,7 +85,6 @@ export function AddMovieForm({onClose}) {
       console.log(response);
       handleClose();
     }
-
     // setTimeout(() => setIsSubmitting(false), 3000);
   };
 
@@ -100,13 +104,15 @@ export function AddMovieForm({onClose}) {
             onValueChange={setSelectedYear}
             required
           >
+           
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Select Year" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="2025">2025</SelectItem>
-              <SelectItem value="2024">2024</SelectItem>
-              <SelectItem value="2023">2023</SelectItem>
+              {years.map((year) => (
+                 <SelectItem key={year} value={year.toString()}>{year}</SelectItem>
+              ))}
+             
             </SelectContent>
           </Select>
         </div>

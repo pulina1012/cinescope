@@ -4,9 +4,13 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**.media-amazon.com",
+        hostname: "**m.media-amazon.com",
         port: "",
         search: "",
+      },
+      {
+        protocol: "https",
+        hostname: "th.bing.com",
       },
     ],
   },

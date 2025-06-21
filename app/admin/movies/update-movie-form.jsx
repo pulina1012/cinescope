@@ -15,20 +15,31 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { createMovie } from "@/actions/movies";
+import { updateMovie } from "@/actions/movies";
 import { getYears } from "@/lib/utils";
 
-
-export function AddMovieForm({onClose}) {
+export function UpdateMovieForm({ onClose, movie }) {
   const router = useRouter();
   const years = getYears;
   const [isSubmitting, setIsSubmitting] = useState(false);
+
   // Controlled states
-  const [selectedYear, setSelectedYear] = useState("");
-  const [selectedGenres, setSelectedGenres] = useState("");
-  const [selectedStatus, setSelectedStatus] = useState("");
+  const [title, setTitle] = useState(movie?.title || "");
+  const [director, setDirector] = useState(movie?.director.at(0) || "");
+  const [rating, setRating] = useState(movie.imdb?.rating || "");
+  const [runtime, setRuntime] = useState(movie?.runtime || "");
+  const [overview, setOverview] = useState(movie?.overview || "");
+  const [backdrop, setBackdrop] = useState(movie?.backdrop || "");
+  const [poster, setPoster] = useState(movie?.poster || "");
+
+  const [selectedYear, setSelectedYear] = useState(movie?.year || "");
+  const [selectedGenres, setSelectedGenres] = useState(
+    movie?.genres.at(0) || null
+  );
+  const [selectedStatus, setSelectedStatus] = useState(movie?.mStatus || "");
 
   const handleClose = () => {
+    // Reset controlled fields
     setSelectedYear(null);
     setSelectedGenres(null);
     setSelectedStatus(null);
@@ -37,48 +48,36 @@ export function AddMovieForm({onClose}) {
     onClose(false);
   };
 
-  getYears
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const title = formData.get("title");
-    const year = formData.get("year");
-    const director = formData.get("director");
-    const genre = formData.get("genre");
-    const rating = formData.get("rating");
-    const runtime = formData.get("runtime");
-    const overview = formData.get("overview");
-    const poster = formData.get("poster");
-    const backdrop = formData.get("backdrop");
-    const movieStatus = formData.get("status");
+   
 
     console.log("Form Data", {
       title,
-      year,
+      year: selectedYear,
       director,
-      genre,
+      genre: selectedGenres,
       rating,
       runtime,
       overview,
       poster,
       backdrop,
-      status: movieStatus,
+      status: selectedStatus,
     });
 
     setIsSubmitting(true);
 
-    const response = await createMovie({
+    const response = await updateMovie(movie?._id, {
       title,
-      year,
+      year: selectedYear,
       directors: [director],
-      genres: [genre],
+      genres: [selectedGenres],
       imdb: { rating: Number(rating) },
       runtime,
       plot: overview,
       poster,
       backdrop,
-      status: movieStatus,
+      status: selectedStatus,
       lastupdated: new Date().toISOString(),
     });
 
@@ -97,10 +96,17 @@ export function AddMovieForm({onClose}) {
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2 ">
           <Label htmlFor="title">Title</Label>
-          <Input id="title" name="title" placeholder="Movie Title" required />
+          <Input
+            id="title"
+            name="title"
+            placeholder="Movie Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
         </div>
         <div className="space-y-2 ">
-          <Label htmlFor="title">Year</Label>
+          <Label htmlFor="year">Year</Label>
           <Select
             id="year"
             name="year"
@@ -108,21 +114,27 @@ export function AddMovieForm({onClose}) {
             onValueChange={setSelectedYear}
             required
           >
-           
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Select Year" />
             </SelectTrigger>
             <SelectContent>
               {years.map((year) => (
-                 <SelectItem key={year} value={year.toString()}>{year}</SelectItem>
+                <SelectItem key={year} value={year.toString()}>
+                  {year}
+                </SelectItem>
               ))}
-             
             </SelectContent>
           </Select>
         </div>
         <div className="space-y-2">
           <Label htmlFor="director">Director</Label>
-          <Input id="director" name="director" placeholder="Director name" />
+          <Input
+            id="director"
+            name="director"
+            value={director}
+            onChange={(e) => setDirector(e.target.value)}
+            placeholder="Director name"
+          />
         </div>
         <div className="space-y-2">
           <Label htmlFor="genre">Genre</Label>
@@ -155,6 +167,8 @@ export function AddMovieForm({onClose}) {
             max="10"
             step="0.1"
             placeholder="Rating (0.0 - 10.0)"
+            value={rating}
+            onChange={(e) => setRating(e.target.value)}
             required
           />
         </div>
@@ -166,6 +180,8 @@ export function AddMovieForm({onClose}) {
             type="number"
             min="1"
             placeholder="Runtime in minutes"
+            value={runtime}
+            onChange={(e) => setRuntime(e.target.value)}
             required
           />
         </div>
@@ -177,6 +193,8 @@ export function AddMovieForm({onClose}) {
           name="overview"
           placeholder="Movie description"
           className="h-[100px]"
+          value={overview}
+          onChange={(e) => setOverview(e.target.value)}
         />
       </div>
       <div className="grid grid-cols-2 gap-4">
@@ -186,6 +204,8 @@ export function AddMovieForm({onClose}) {
             id="poster"
             name="poster"
             placeholder="URL to poster image"
+            value={poster}
+            onChange={(e) => setPoster(e.target.value)}
             required
           />
         </div>
@@ -195,6 +215,8 @@ export function AddMovieForm({onClose}) {
             id="backdrop"
             name="backdrop"
             placeholder="URL to backdrop image"
+            value={backdrop}
+            onChange={(e) => setBackdrop(e.target.value)}
           />
         </div>
 
@@ -230,7 +252,7 @@ export function AddMovieForm({onClose}) {
           Cancel
         </Button>
         <Button type="submit" className="min-w-[102px]" disabled={isSubmitting}>
-          {isSubmitting ? "Adding... " : "Add Movie"}
+          {isSubmitting ? "Saving... " : "Save changes"}
         </Button>
       </DialogFooter>
     </form>

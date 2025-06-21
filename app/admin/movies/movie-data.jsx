@@ -11,28 +11,34 @@ export default async function MovieData() {
 
     if (movies.length > 0) {
       const refinedMovies = movies.map((movie, key) => ({
-        id: key + 1,
+        id: movie._id.toString(),
         title: movie.title,
         year: movie.year,
-        plot: movie.plot,
+        overview: movie.plot,
         rated: movie.rated,
-        genres: movie.genres,
+        genres: Array.isArray(movie.genres)
+          ? movie.genres
+          : movie.genres
+          ? [movie.genres]
+          : [], 
+          // ← ensures it's always an array
         poster: movie.poster,
         imdb: movie.imdb,
-        mStatus:movie.status,
+        mStatus: movie.status,
         runtime: movie.runtime,
+        director: movie.directors,
+        backdrop: movie.backdrop,
       }));
 
       return <MovieTable movies={refinedMovies} />;
-    }
-    else{
+    } else {
       return (
-      <div className="flex justify-center items-center h-[400px]">
-        <p className="text-destructive font-medium animate-pulse duration-1000">
-          No Movies Available!
-        </p>
-      </div>
-    );
+        <div className="flex justify-center items-center h-[400px]">
+          <p className="text-destructive font-medium animate-pulse duration-1000">
+            No Movies Available!
+          </p>
+        </div>
+      );
     }
   } catch (error) {
     console.log("Error fetching movies", error);

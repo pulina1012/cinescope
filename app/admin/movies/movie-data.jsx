@@ -29,7 +29,7 @@ export default async function MovieData({ query = "" }) {
     return (
       <div className="flex justify-center items-center h-[400px]">
         <p className="text-destructive font-medium animate-pulse duration-1000">
-          No Movies Available!
+          No Movies Available!!
         </p>
       </div>
     );

@@ -12,7 +12,7 @@ import {
 import { UpdateMovieForm } from "./update-movie-form";
 
 export default function UpdateMovieDialog({ open, onOpenChange, movie }) {
-  console.log("update movie:", movie);
+  // console.log("update movie:", movie);
   return (
     <div>
       <Dialog open={open} onOpenChange={onOpenChange}>

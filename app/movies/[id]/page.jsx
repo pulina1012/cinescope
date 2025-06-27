@@ -1,6 +1,20 @@
 import { getMovieById } from "@/actions/movies";
 import MovieLoading from "./movie-loading";
 
+export async function generateMetaData(props) {
+  const { id } = await props.params;
+  const movie = await getMovieById(id);
+
+  return {
+    title: movie?.data?.title
+      ? `CineScope | ${movie.data.title}`
+      : "CineScope | Movie Details",
+    description:
+      movie?.data?.plot ??
+      "Find your favorite movie ratings and recommendations",
+  };
+}
+
 export default async function MovieDetailsPage(props) {
   const { id } = await props.params;
   // const searchparams = await props.searchParams;
@@ -18,7 +32,7 @@ export default async function MovieDetailsPage(props) {
       <h2 className="text-center py-5">Movie Title: {movie?.data?.title}</h2>
       <p className="text-center py-5">Movie Plot: {movie?.data?.plot}</p>
 
-      <MovieLoading/>
+      <MovieLoading />
     </main>
   );
 }

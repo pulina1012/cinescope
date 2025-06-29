@@ -3,6 +3,9 @@ import MovieLoading from "./movie-loading";
 
 export async function generateMetaData(props) {
   const { id } = await props.params;
+
+  //simulate a delay(2 seconds)
+  await new Promise((resolve) => setTimeout(resolve, 2000));
   const movie = await getMovieById(id);
 
   return {
@@ -15,12 +18,20 @@ export async function generateMetaData(props) {
   };
 }
 
+export const revalidate = 60;
+
+
 export default async function MovieDetailsPage(props) {
   const { id } = await props.params;
   // const searchparams = await props.searchParams;
   const movie = await getMovieById(id);
 
-  console.log("movie", movie);
+  //error handle
+  if (!movie || !movie.data) {
+    throw new Error("Movie not found");
+  }
+
+  // console.log("movie", movie);
 
   return (
     <main className="flex flex-col justify-center py-16 px-4 mx-auto">

@@ -25,7 +25,7 @@ export function UpdateMovieForm({ onClose, movie }) {
 
   // Controlled states
   const [title, setTitle] = useState(movie?.title || "");
-  const [director, setDirector] = useState(movie?.director.at(0) || "");
+  const [director, setDirector] = useState(movie?.directors.at(0) || "");
   const [rating, setRating] = useState(movie.imdb?.rating || "");
   const [runtime, setRuntime] = useState(movie?.runtime || "");
   const [overview, setOverview] = useState(movie?.overview || "");

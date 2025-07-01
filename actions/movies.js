@@ -6,6 +6,7 @@ import { ObjectId } from "mongodb";
 export const getMovies = async () => {
   try {
     const response = await fetch(`${process.env.API_BASE_URL}/v1/movies`, {
+      
       method: "GET",
       headers: {
         "content-Type": "application/json",
@@ -35,7 +36,7 @@ export const searchMovies = async (query) => {
   try {
     // Search by title (i = case-insensitive)
     const movies = await db
-      .collection("movies")
+      .collection("movies_new")
       .find({ title: { $regex: query, $options: "i" } })
       .limit(50)
       .toArray();

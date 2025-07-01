@@ -35,7 +35,8 @@ export default function MovieTable({ movies }) {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [showUpdateDialog, setShowUpdateDialog] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
-
+  const [director, setDirector] = useState(Array.isArray(movies?.directors) ? movies.directors[0] : "");
+  
   const toggleUpdateDialog = (open) => {
     // Using requestAnimationFrame to ensure the dialog opens after the state update
     requestAnimationFrame(() => setShowUpdateDialog(open || !showUpdateDialog));
@@ -46,7 +47,7 @@ export default function MovieTable({ movies }) {
   };
 
   const handleDeleteMovie = async (movieId) => {
-    const resp = await deleteMovie(movieId);  
+    const resp = await deleteMovie(movieId);
     if (resp?.success) {
       setSelectedMovie(null);
       toggleDeleteDialog(false);
@@ -66,7 +67,7 @@ export default function MovieTable({ movies }) {
         return "text-gray-800 bg-gray-100";
     }
   };
-  // console.log("table movies:", movies);
+  console.log("table movies:", movies);
   return (
     <div className="rounded-md border">
       <Table>
@@ -77,7 +78,7 @@ export default function MovieTable({ movies }) {
             <TableHead>Title</TableHead>
             <TableHead>Year</TableHead>
             <TableHead>Genre</TableHead>
-            <TableHead>Director</TableHead>
+            {/* <TableHead>Director</TableHead> */}
             <TableHead>Rating</TableHead>
             <TableHead>Status</TableHead>
             <TableHead className="text-right">Actions</TableHead>
@@ -109,7 +110,7 @@ export default function MovieTable({ movies }) {
                   ))}
                 </div>
               </TableCell>
-              <TableCell>{movie.director}</TableCell>
+              {/* <TableCell>{movie?.directors}</TableCell> */}
               <TableCell>{Number(movie?.imdb?.rating).toFixed(1)}</TableCell>
               <TableCell className="capitalize">
                 <Badge

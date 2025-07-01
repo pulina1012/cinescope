@@ -19,7 +19,7 @@ export default async function MovieData({ query = "" }) {
       poster: movie.poster,
       imdb: movie.imdb,
       runtime: movie.runtime,
-      status: movie.status ?? "published",
+      mStatus: movie.status ?? "published",
       directors: movie.directors,
     }));
 

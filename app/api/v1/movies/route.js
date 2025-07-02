@@ -17,7 +17,7 @@ export const GET = async () => {
       .limit(20)
       .toArray()
       .catch((error) => {
-        console.error("Error fetching movies from databases:",error);
+        console.error("Error fetching movies from databases:", error);
         return [];
       });
     //  console.log("db movies",movies);
@@ -34,6 +34,10 @@ export const GET = async () => {
   }
 };
 
+export const POST = async () => {
+  // Movies update endpoint
+  return NextResponse.json({ message: "Movie updated!" }, { status: 200 });
+};
 // 404 - notFound
 // 500 -server error
 // 200 - success

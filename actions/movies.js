@@ -121,7 +121,7 @@ export const updateMovie = async (movieId, movieDoc) => {
       );
 
     if (result.acknowledged) {
-      console.log(`A movie  was inserted with the _id; ${result.insertedId}`);
+      console.log(`A movie was inserted with the _id: ${result.insertedId}`);
       return {
         success: true,
         message: "Movie updated successfully!",

@@ -2,6 +2,7 @@ import HeaderNav from "@/components/header-nav";
 import MyFirstComponent from "../components/MyFirstComponent";
 import HeroBanner from "@/components/home/hero-banner";
 import FeaturedMovies from "@/components/home/featured-movies";
+import FooterArea from "@/components/footer";
 
 //SSR - Server side rendered - server component
 export default function Home() {
@@ -13,7 +14,7 @@ export default function Home() {
         <FeaturedMovies/>
         {/* <MyFirstComponent /> */}
       </main>
-      <footer className="bg-amber-200 h-72">footer Section</footer>
+        <FooterArea/>
     </div>
   );
 }

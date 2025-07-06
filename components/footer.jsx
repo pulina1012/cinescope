@@ -10,12 +10,12 @@ export default function FooterArea() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Logo */}
           <div className="flex flex-col items-start">
-            <Logo className="h-14 w-14" />
+            <Logo className="h-20 w-20 mt-5"/>
           </div>
 
           {/* Navigation Links */}
           <div>
-            <h5 className="mb-2 text-sm font-semibold text-muted-foreground">
+            <h5 className="mb-4 text-sm font-semibold text-muted-foreground">
               Quick Links
             </h5>
             <ul className="space-y-2 text-sm">
@@ -37,10 +37,18 @@ export default function FooterArea() {
               </li>
               <li>
                 <Link
-                  href="/contact"
+                  href="/admin"
                   className="hover:text-primary transition-colors duration-200"
                 >
-                  Contact Us
+                  Admin
+                </Link>
+              </li>
+                <li>
+                <Link
+                  href="/login"
+                  className="hover:text-primary transition-colors duration-200"
+                >
+                  Login
                 </Link>
               </li>
             </ul>
@@ -48,22 +56,39 @@ export default function FooterArea() {
 
           {/* Social Icons */}
           <div>
-            <h5 className="mb-2 text-sm font-semibold text-muted-foreground">
+            <h5 className="mb-4 text-sm font-semibold text-muted-foreground">
               Follow us on
             </h5>
             <div className="flex gap-3">
-              <Button variant="ghost" size="icon" className="hover:bg-green-200">
-                <Facebook className="h-4 w-4" />
-              </Button>
-              <Button variant="ghost" size="icon" className="hover:bg-green-200">
-                <Instagram className="h-4 w-4" />
-              </Button>
-              <Button variant="ghost" size="icon" className="hover:bg-green-200">
-                <Linkedin className="h-4 w-4" />
-              </Button>
-              <Button variant="ghost" size="icon" className="hover:bg-green-200">
-                <Twitter className="h-4 w-4" />
-              </Button>
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="hover:bg-green-200"
+                  >
+                    <Facebook className="h-4 w-4" />
+                  </Button>
+                </li>
+                <li>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="hover:bg-green-200"
+                  >
+                    <Instagram className="h-4 w-4" />
+                  </Button>
+                </li>
+                <li>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="hover:bg-green-200"
+                  >
+                    <Linkedin className="h-4 w-4" />
+                  </Button>
+                </li>
+              </ul>
             </div>
           </div>
         </div>

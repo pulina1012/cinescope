@@ -13,7 +13,7 @@ export default async function MovieData({ query = "" }) {
       id: movie._id.toString(),
       title: movie.title,
       year: movie.year,
-      plot: movie.plot,
+      overview: movie.plot,
       rated: movie.rated,
       genres: movie.genres,
       poster: movie.poster,
@@ -21,6 +21,7 @@ export default async function MovieData({ query = "" }) {
       runtime: movie.runtime,
       mStatus: movie.status ?? "published",
       directors: movie.directors,
+      backdrop:movie.backdrop
     }));
 
     return <MovieTable movies={refinedMovies} />;

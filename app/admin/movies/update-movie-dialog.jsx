@@ -20,7 +20,7 @@ export default function UpdateMovieDialog({ open, onOpenChange, movie }) {
           <DialogHeader>
             <DialogTitle>Update Movie</DialogTitle>
             <DialogDescription>
-              Fill in the details to update the movie.
+              Fill below details to update the movie.
             </DialogDescription>
           </DialogHeader>
           {/* update movie form */}
